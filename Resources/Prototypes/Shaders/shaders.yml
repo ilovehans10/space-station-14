@@ -30,6 +30,11 @@
   path: "/Textures/Shaders/flashed_effect.swsl"
 
 - type: shader
+  id: DarkFlashedEffect
+  kind: source
+  path: "/Textures/Shaders/dark_flashed_effect.swsl"
+
+- type: shader
   id: Singularity
   kind: source
   path: "/Textures/Shaders/singularity.swsl"
