@@ -17,8 +17,8 @@ highlights-warden = Warden, "Ward", Armory, Security, "Sec"
 highlights-prisoner = Prisoner, Prison, Perma, Jail
 
 # Cargo
-highlights-cargo-technician = Cargo Technician, Cargo Tech, "Cargo"
-highlights-salvage-specialist = Salvage Specialist, Salvager, Salvage, "Salv", "Cargo", Miner
+highlights-cargo-technician = Cargo Technician, Cargo Tech, Cargo
+highlights-salvage-specialist = Salvage Specialist, Salvager, Salvage, "Salv", Cargo, Miner
 
 # Engineering
 highlights-atmospheric-technician = Atmospheric Technician, Atmos tech, Atmospheric, Engineering, "Atmos", "Engi", Tesla, Singularity, Singulo
