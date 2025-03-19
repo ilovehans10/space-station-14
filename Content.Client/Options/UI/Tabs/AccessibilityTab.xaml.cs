@@ -26,6 +26,8 @@ public sealed partial class AccessibilityTab : Control
         Control.AddOptionColorSlider(HCCVars.ChatHighlightsColor, HighlightsColorSlider);
         // Harmony - end of chat highlighting
 
+        Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);
+
         Control.Initialize();
     }
 }
