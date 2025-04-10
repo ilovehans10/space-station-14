@@ -46,7 +46,8 @@ using Content.Shared._Harmony.CCVars; // Harmony - chat highlighting, remove whe
 
 namespace Content.Client.UserInterface.Systems.Chat;
 
-public sealed class ChatUIController : UIController, IOnSystemChanged<CharacterInfoSystem> // Harmony - chat highlighting, remove when chat refactor is merged
+// Harmony - chat highlighting, the IOnSystemChanged<CharacterInfoSystem> interface was added on the next line to make it so chat highlighting could work when character info is updated
+public sealed class ChatUIController : UIController, IOnSystemChanged<CharacterInfoSystem> // Harmony - chat highlighting, remove all the code after the coma when chat refactor is merged
 {
     [Dependency] private readonly IClientAdminManager _admin = default!;
     [Dependency] private readonly IChatManager _manager = default!;
