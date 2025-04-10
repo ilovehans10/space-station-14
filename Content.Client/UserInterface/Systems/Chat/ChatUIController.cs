@@ -328,8 +328,8 @@ public sealed class ChatUIController : UIController, IOnSystemChanged<CharacterI
 
         // If the character has a normal name (eg. "Name Surname" and not "Name Initial Surname" or a particular species name)
         // subdivide it so that the name and surname individually get highlighted.
-        if (newHighlights.Count(c => c == ' ') == 1)
-            newHighlights = newHighlights.Replace(" ", "\n@");
+        if (newHighlights.Count(c => (c == ' ' || c == '-')) == 1)
+            newHighlights = newHighlights.Replace("-", "\n@").Replace(" ", "\n@");
 
         // Convert the job title to kebab-case and use it as a key for the loc file.
         string jobKey = job.Replace(' ', '-').ToLower();
