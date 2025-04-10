@@ -331,6 +331,11 @@ public sealed class ChatUIController : UIController, IOnSystemChanged<CharacterI
         if (newHighlights.Count(c => (c == ' ' || c == '-')) == 1)
             newHighlights = newHighlights.Replace("-", "\n@").Replace(" ", "\n@");
 
+        // If the character has a name with more than one hyphen assume it is a lizard name and shorten the name to just
+        // the first word.
+        if (newHighlights.Count(c => c == '-') > 1)
+            newHighlights = newHighlights.Split("-")[0];
+
         // Convert the job title to kebab-case and use it as a key for the loc file.
         string jobKey = job.Replace(' ', '-').ToLower();
 
