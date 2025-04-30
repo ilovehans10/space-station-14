@@ -26,6 +26,8 @@ public sealed class PickObjectiveTargetSystem : EntitySystem
         SubscribeLocalEvent<PickSpecificPersonComponent, ObjectiveAssignedEvent>(OnSpecificPersonAssigned);
         SubscribeLocalEvent<PickRandomPersonComponent, ObjectiveAssignedEvent>(OnRandomPersonAssigned);
         SubscribeLocalEvent<PickRandomHeadComponent, ObjectiveAssignedEvent>(OnRandomHeadAssigned);
+        SubscribeLocalEvent<PickRandomTraitorComponent, ObjectiveAssignedEvent>(OnTraitorAssigned);
+        SubscribeLocalEvent<PickRandomAntagComponent, ObjectiveAssignedEvent>(OnAntagAssigned);
 
         SubscribeLocalEvent<RandomTraitorProgressComponent, ObjectiveAssignedEvent>(OnRandomTraitorProgressAssigned);
         SubscribeLocalEvent<RandomTraitorAliveComponent, ObjectiveAssignedEvent>(OnRandomTraitorAliveAssigned);
@@ -208,5 +210,54 @@ public sealed class PickObjectiveTargetSystem : EntitySystem
         }
 
         _target.SetTarget(ent.Owner, _random.Pick(traitors).Id, target);
+    }
+
+    // imp addition for Bounty Hunters
+    private void OnAntagAssigned(Entity<PickRandomAntagComponent> ent, ref ObjectiveAssignedEvent args)
+    {
+        // invalid prototype
+        if (!TryComp<TargetObjectiveComponent>(ent.Owner, out var target))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        var antags = _traitorRule.GetOtherAntagMindsAliveAndConnected(args.Mind).Select(t => t.Id).ToHashSet(); // Imp edit -  just get entity
+
+        // You are the first/only antag.
+        if (antags.Count == 0)
+        {
+            //Fallback to assign people who could be assigned as traitor.
+            var allHumans = _mind.GetAliveHumans(args.MindId).Select(p => p.Owner).ToHashSet();
+            var allValidTraitorCandidates = new HashSet<EntityUid>();
+            if (_traitorRule.CurrentAntagPool != null)
+            {
+                var poolSessions = _traitorRule.CurrentAntagPool.GetPoolSessions();
+                foreach (var mind in allHumans)
+                {
+                    if (!args.Mind.ObjectiveTargets.Contains(mind) && _job.MindTryGetJob(mind, out var prototype) && prototype.CanBeAntag && _mind.TryGetSession(mind, out var session) && poolSessions.Contains(session))
+                    {
+                        allValidTraitorCandidates.Add(mind);
+                    }
+                }
+            }
+
+            // Just try and save some other nerd for some reason. The syndicate needs them alive.
+            if (allValidTraitorCandidates.Count == 0)
+            {
+                allValidTraitorCandidates = allHumans;
+            }
+            antags = allValidTraitorCandidates;
+
+            // One last check for the road, then cancel it if there's nothing left
+            if (antags.Count == 0)
+            {
+                args.Cancelled = true;
+                return;
+            }
+            // Imp edit end
+        }
+        var randomTarget = _random.Pick(antags); // Imp edit
+        _target.SetTarget(ent.Owner, randomTarget, target);
     }
 }
