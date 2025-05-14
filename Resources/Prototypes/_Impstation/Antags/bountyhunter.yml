@@ -24,8 +24,7 @@
     id: BountyHunterIDCard
     ears: ClothingHeadsetFreelance
     belt: ClothingBeltMercWebbing
-    pocket1: BaseSeclinkRadio
-    pocket2: BountyHunterGear
+    pocket1: BountyHunterGear
   storage:
     back:
     - WeaponPistolMk58
