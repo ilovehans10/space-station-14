@@ -870,7 +870,7 @@
     - SyndicateAgent
     - Wizard
     - Xenoborg
-    - Freelance # (imp)
+    - Freelance # (imp) Bounty Hunter
   - type: Tag #  Ignore Chameleon tags
     tags:
     - DoorBumpOpener

@@ -26,8 +26,8 @@ public sealed class PickObjectiveTargetSystem : EntitySystem
         SubscribeLocalEvent<PickSpecificPersonComponent, ObjectiveAssignedEvent>(OnSpecificPersonAssigned);
         SubscribeLocalEvent<PickRandomPersonComponent, ObjectiveAssignedEvent>(OnRandomPersonAssigned);
         SubscribeLocalEvent<PickRandomHeadComponent, ObjectiveAssignedEvent>(OnRandomHeadAssigned);
-        SubscribeLocalEvent<PickRandomTraitorComponent, ObjectiveAssignedEvent>(OnTraitorAssigned);
-        SubscribeLocalEvent<PickRandomAntagComponent, ObjectiveAssignedEvent>(OnAntagAssigned);
+        SubscribeLocalEvent<PickRandomTraitorComponent, ObjectiveAssignedEvent>(OnTraitorAssigned); // imp Bounty Hunter
+        SubscribeLocalEvent<PickRandomAntagComponent, ObjectiveAssignedEvent>(OnAntagAssigned); // imp Bounty Hunter
 
         SubscribeLocalEvent<RandomTraitorProgressComponent, ObjectiveAssignedEvent>(OnRandomTraitorProgressAssigned);
         SubscribeLocalEvent<RandomTraitorAliveComponent, ObjectiveAssignedEvent>(OnRandomTraitorAliveAssigned);
@@ -212,7 +212,7 @@ public sealed class PickObjectiveTargetSystem : EntitySystem
         _target.SetTarget(ent.Owner, _random.Pick(traitors).Id, target);
     }
 
-    // imp addition for Bounty Hunters
+    // imp addition for Bounty Hunter -- start
     private void OnAntagAssigned(Entity<PickRandomAntagComponent> ent, ref ObjectiveAssignedEvent args)
     {
         // invalid prototype
@@ -260,4 +260,5 @@ public sealed class PickObjectiveTargetSystem : EntitySystem
         var randomTarget = _random.Pick(antags); // Imp edit
         _target.SetTarget(ent.Owner, randomTarget, target);
     }
+    // imp addition for Bounty Hunter -- end
 }

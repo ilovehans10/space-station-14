@@ -1,6 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
-using Content.Server.Antag.Components;
+using Content.Server.Antag.Components; // imp Bounty Hunter
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
 using Content.Server.Objectives;
@@ -262,7 +262,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         return traitors;
     }
 
-// imp edit for Bounty Hunter
+// imp edit for Bounty Hunter -- start
     public List<(EntityUid Id, MindComponent Mind)> GetOtherAntagMindsAliveAndConnected(MindComponent ourMind)
     {
         List<(EntityUid Id, MindComponent Mind)> allAntags = new();
@@ -293,4 +293,5 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
         return antags;
     }
+// imp edit for Bounty Hunter -- end
 }
