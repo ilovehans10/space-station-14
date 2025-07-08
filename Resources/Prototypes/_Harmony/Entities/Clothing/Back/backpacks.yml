@@ -1,0 +1,33 @@
+- type: entity
+  parent: ClothingBackpackHolding
+  id: ClothingBackpackHoldingTattered
+  name: tattered bag of holding
+  description: A damaged backpack that opens into a localized pocket of bluespace. The damage seems to be affecting its space warping properties in strange ways.
+  components:
+  - type: MultiHandedItem
+  - type: Sprite
+    sprite: Clothing/Back/Backpacks/holding.rsi
+    state: holding
+    layers:
+    - state: holding
+    - state: holding-unlit
+      shader: unshaded
+  - type: Clothing
+    slots:
+      #This removes the ability to wear that comes from the parent
+  - type: Item
+    size: Ginormous
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,2,7
+    - 3,0,10,2
+    - 3,4,7,7
+    - 4,3,8,3
+    - 8,5,15,7
+    - 9,3,15,4
+    - 11,0,11,1
+    - 12,0,15,2
+    quickInsert: true
+    areaInsert: true
+  - type: Dumpable
